@@ -37,6 +37,6 @@ int main(void)
         result += (ull)min_cost * dist[i];
     }
     cout << result << '\n';
-
+	cout << "Program is finished" << endl;
     return 0;
 }
