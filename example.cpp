@@ -28,7 +28,7 @@ int main(void)
     {
         cin >> gas_cost[i];
     }
-
+	cout << "Input is complete" << endl;
     int min_cost = gas_cost[0];
     ull result = 0;
     for (int i = 0; i < size - 1; i++)
