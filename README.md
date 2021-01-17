@@ -8,3 +8,6 @@ Add your Github username below:
 
 - [x] serranoarevalo!
 - [x] aikasi
+- [x] GalaxySailor!
+- [x] yuyaebean
+- [x] nanmadol
