@@ -8,7 +8,6 @@ Add your Github username below:
 
 - [x] serranoarevalo!
 - [x] presuit!
-- [x] serranoarevalo!
 - [x] saintluxpgw!
 - [x] T-WK! hello!
 - [x] cicada
