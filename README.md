@@ -7,6 +7,7 @@ Practicing Git &amp; Github for collaboration.
 Add your Github username below:
 
 - [x] serranoarevalo!
+- [x] gzero1728
 - [x] jiun-Kim (I love learn coding from Nomadcoder)
 - [x] hs04111
 - [x] sun!
