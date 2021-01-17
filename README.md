@@ -7,8 +7,4 @@ Practicing Git &amp; Github for collaboration.
 Add your Github username below:
 
 - [x] serranoarevalo!
-<<<<<<< HEAD
-- [x] youngjin^^!
-=======
->>>>>>> Added username
 - [x] yuyaebean
