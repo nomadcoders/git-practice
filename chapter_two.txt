@@ -1,0 +1,10 @@
+Title: This is the second one!
+
+Hello friends!
+
+-mixed reset: go back commit, keep the files created(unstage)
+-hard reset: go back commit, delete the files
+
+checkout -b: create branch
+
+commit --amend --no-edit: amend the lateset commit
