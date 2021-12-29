@@ -9,8 +9,8 @@ Add your Github username below:
 
 
 ## '개발자를 위한 윈도우 셋업' by Nomadcoder
-[X] Chocolatey
-[X] Powerlevel10K
-[X] Prettier
-[X] Nvm
-[X] Github CLI
+- [x] Chocolatey
+- [x] Powerlevel10K
+- [x] Prettier
+- [x] Nvm
+- [x] Github CLI
