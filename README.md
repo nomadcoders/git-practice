@@ -37,5 +37,5 @@ Add your Github username below:
 - [x] aikasi
 - [x] GalaxySailor!
 - [x] yuyaebean
-- [x] nanmadol
+
 - [x] gw
