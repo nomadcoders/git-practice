@@ -39,3 +39,4 @@ Add your Github username below:
 - [x] yuyaebean
 - [x] nanmadol
 - [x] Young Joo from DREAM BOYS
+- [x] KIM Young Joo from DREAM BOYS 2022.06.30
