@@ -6,9 +6,6 @@ Practicing Git &amp; Github for collaboration.
 
 Add your Github username below:
 
--   [x] serranoarevalo!
--   [x] Don
--   [x] kd!
 -   [x] kangdongil
 -   [x] dkssyddico
 -   [x] confidential-nt
@@ -39,4 +36,4 @@ Add your Github username below:
 -   [x] yuyaebean
 -   [x] nanmadol
 -   [x] jaehyuenjung!
--   [x] Prosted
+-   [x] Prosted- [x] Hecacho
