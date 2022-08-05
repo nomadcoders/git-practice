@@ -40,4 +40,4 @@ Add your Github username below:
 -   [x] nanmadol
 -   [x] jaehyuenjung!
 -   [x] Prosted
--   [x] Son 2022-08-05!
+-   [x] Son 2022-08-05
