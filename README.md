@@ -38,4 +38,4 @@ Add your Github username below:
 - [x] GalaxySailor!
 - [x] yuyaebean
 - [x] nanmadol
-- [x] GreenIdeology ( Kimchi Killer ) 
+- [x] GreenIdeology ( Kimchi Killer! ) 
