@@ -38,5 +38,7 @@ Add your Github username below:
 -   [x] GalaxySailor!
 -   [x] yuyaebean
 -   [x] nanmadol
+-   [x] sonG1031
 -   [x] jaehyuenjung!
 -   [x] Prosted
+
