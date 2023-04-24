@@ -2,7 +2,7 @@
 
 Practicing Git &amp; Github for collaboration.
 
-## Who has been here?
+ ## Who has been here?
 
 Add your Github username below:
 
@@ -40,3 +40,4 @@ Add your Github username below:
 -   [x] nanmadol
 -   [x] jaehyuenjung!
 -   [x] Prosted
+-   [x] aryagaon
