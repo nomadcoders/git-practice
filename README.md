@@ -1,4 +1,4 @@
-# Git Practice
+# Chanwu's Git Practice
 
 Practicing Git &amp; Github for collaboration.
 
@@ -40,3 +40,4 @@ Add your Github username below:
 -   [x] nanmadol
 -   [x] jaehyuenjung!
 -   [x] Prosted
+-   [x] KanuBang
