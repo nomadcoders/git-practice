@@ -40,4 +40,4 @@ Add your Github username below:
 - [x] nanmadol
 - [x] jaehyuenjung!
 - [x] Prosted
-- [x] batteryhun 2023.7.17
+- [x] batteryhun
