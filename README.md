@@ -40,4 +40,4 @@ Add your Github username below:
 - [x] nanmadol
 - [x] jaehyuenjung!
 - [x] Prosted
-- [x] Jammin
+- [x] Astrox 88d PRO
