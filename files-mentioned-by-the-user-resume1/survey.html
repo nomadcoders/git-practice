@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>강의 만족도 조사</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 10% 8%, rgba(0, 194, 255, 0.46), transparent 30%),
+        radial-gradient(circle at 90% 12%, rgba(0, 95, 255, 0.28), transparent 26%),
+        linear-gradient(135deg, #e6f6ff 0%, #f8fcff 45%, #dbeaff 100%);
+      color: #1f2933;
+      font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      line-height: 1.55;
+      padding: 28px 14px;
+      overflow-x: hidden;
+    }
+
+    .page {
+      width: min(100%, 980px);
+      margin: 0 auto;
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(140deg, rgba(255, 255, 255, 0.97), rgba(234, 247, 255, 0.96)),
+        #ffffff;
+      border: 1px solid rgba(0, 136, 255, 0.28);
+      border-radius: 18px;
+      box-shadow: 0 24px 70px rgba(0, 88, 168, 0.2);
+      padding: 34px;
+    }
+
+    .card::before,
+    .card::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      border-radius: 999px;
+      animation: bubble 9s ease-in-out infinite;
+    }
+
+    .card::before {
+      width: 300px;
+      height: 300px;
+      right: -120px;
+      top: -110px;
+      background: rgba(0, 174, 255, 0.16);
+    }
+
+    .card::after {
+      width: 170px;
+      height: 170px;
+      left: 44%;
+      bottom: -72px;
+      background: rgba(0, 95, 255, 0.11);
+      animation-delay: -4s;
+    }
+
+    .header {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      padding-bottom: 22px;
+      padding-left: 238px;
+      min-height: 236px;
+      border-bottom: 2px solid rgba(0, 116, 217, 0.16);
+      margin-bottom: 26px;
+    }
+
+    .page-photo {
+      position: absolute;
+      top: 28px;
+      left: 28px;
+      width: 196px;
+      height: 244px;
+      object-fit: cover;
+      border-radius: 28px;
+      border: 7px solid #ffffff;
+      box-shadow: 0 18px 42px rgba(0, 85, 160, 0.28);
+      transform: rotate(-2deg);
+      animation: pop-in 850ms ease both;
+      z-index: 2;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: #0068d9;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    h1 {
+      margin: 0;
+      color: #035fae;
+      font-size: 34px;
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .guide {
+      margin: 10px 0 0;
+      color: #667682;
+      font-size: 14px;
+    }
+
+    .response-count {
+      flex: 0 0 auto;
+      padding: 12px 16px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #e6f7ff, #d8edff);
+      color: #035fae;
+      font-weight: 900;
+      text-align: center;
+      min-width: 132px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      color: #314456;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 7px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid rgba(0, 116, 217, 0.22);
+      border-radius: 6px;
+      padding: 11px 12px;
+      font: inherit;
+      color: #203141;
+      background: #fbfdfe;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: 2px solid rgba(4, 116, 129, 0.18);
+      border-color: #0074d9;
+      background: #ffffff;
+    }
+
+    .question-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .question {
+      border: 1px solid rgba(0, 116, 217, 0.16);
+      border-radius: 8px;
+      padding: 16px;
+      background: rgba(250, 253, 255, 0.92);
+    }
+
+    .question-title {
+      margin: 0 0 12px;
+      color: #17324d;
+      font-weight: 900;
+      font-size: 15px;
+    }
+
+    .scale {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .scale label {
+      position: relative;
+      margin: 0;
+      cursor: pointer;
+    }
+
+    .scale input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .scale span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 40px;
+      border: 1px solid rgba(0, 116, 217, 0.22);
+      border-radius: 6px;
+      background: #ffffff;
+      color: #536676;
+      font-size: 13px;
+      font-weight: 800;
+      text-align: center;
+      padding: 6px;
+    }
+
+    .scale input:checked + span {
+      background: linear-gradient(90deg, #0068d9, #00a8ff);
+      border-color: #0074d9;
+      color: #ffffff;
+    }
+
+    .opinion {
+      margin-top: 20px;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+      margin-top: 24px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 6px;
+      padding: 11px 16px;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 900;
+      cursor: pointer;
+      background: #e5f4ff;
+      color: #075ca8;
+    }
+
+    button.primary {
+      background: linear-gradient(90deg, #0068d9, #00a8ff);
+      color: #ffffff;
+    }
+
+    button.danger {
+      background: #f2e5e5;
+      color: #9b1c1c;
+    }
+
+    button:hover {
+      filter: brightness(0.96);
+    }
+
+    .message {
+      min-height: 24px;
+      margin-top: 14px;
+      color: #0068d9;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .stat-panel {
+      border: 1px solid rgba(0, 116, 217, 0.16);
+      border-radius: 8px;
+      padding: 18px;
+      background: #fbfdfe;
+    }
+
+    .stat-panel h2 {
+      margin: 0 0 14px;
+      color: #17324d;
+      font-size: 18px;
+    }
+
+    canvas {
+      width: 100%;
+      max-width: 100%;
+      background: #ffffff;
+      border-radius: 6px;
+      border: 1px solid #e5eef3;
+    }
+
+    .empty-state {
+      margin: 22px 0 0;
+      padding: 24px;
+      border-radius: 8px;
+      background: #f7fafc;
+      border: 1px dashed #b7c9d5;
+      color: #657786;
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .summary-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .summary-box {
+      background: linear-gradient(135deg, #e6f7ff, #d8edff);
+      border-radius: 8px;
+      padding: 14px;
+      color: #035fae;
+      font-weight: 900;
+    }
+
+    .summary-box span {
+      display: block;
+      margin-top: 6px;
+      color: #17324d;
+      font-size: 22px;
+    }
+
+    @keyframes bubble {
+      0%, 100% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+      50% {
+        transform: translate3d(16px, -18px, 0) scale(1.04);
+      }
+    }
+
+    @keyframes pop-in {
+      from {
+        opacity: 0;
+        transform: translateY(14px) rotate(-5deg) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: rotate(-2deg) scale(1);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .card {
+        padding: 24px;
+      }
+
+      .header,
+      .stats-grid,
+      .summary-row {
+        grid-template-columns: 1fr;
+      }
+
+      .header {
+        display: grid;
+        padding-left: 0;
+        min-height: auto;
+      }
+
+      .page-photo {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: min(100%, 290px);
+        height: 320px;
+        display: block;
+        margin: 0 0 22px;
+        transform: none;
+      }
+
+      .form-grid,
+      .scale {
+        grid-template-columns: 1fr;
+      }
+
+      .response-count {
+        text-align: left;
+      }
+    }
+
+    @media print {
+      @page {
+        size: A4;
+        margin: 12mm;
+      }
+
+      body {
+        background: #ffffff;
+        padding: 0;
+      }
+
+      .page {
+        width: 100%;
+      }
+
+      .card {
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+        padding: 0;
+      }
+
+      .card::before,
+      .card::after {
+        display: none;
+      }
+
+      #surveyView,
+      .button-row,
+      .message {
+        display: none !important;
+      }
+
+      #statsView {
+        display: block !important;
+      }
+
+      canvas {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section id="surveyView" class="card">
+      <img src="me.jpg" alt="프로필 사진" class="page-photo">
+      <header class="header">
+        <div>
+          <p class="eyebrow">2026년 직무역량 강화 교육</p>
+          <h1>강의 만족도 조사</h1>
+          <p class="guide">본 설문은 강의 품질 향상을 위한 자료로만 활용됩니다. 성실한 응답 부탁드립니다.</p>
+        </div>
+        <div class="response-count">누적 응답<br><span id="responseCount">0</span>건</div>
+      </header>
+
+      <form id="surveyForm" novalidate>
+        <div class="form-grid">
+          <div>
+            <label for="age">연령</label>
+            <input type="number" id="age" name="age" min="10" max="99" placeholder="예: 32" required>
+          </div>
+          <div>
+            <label for="department">소속</label>
+            <input type="text" id="department" name="department" placeholder="예: 인재개발팀" required>
+          </div>
+          <div>
+            <label for="role">직무 또는 학과</label>
+            <input type="text" id="role" name="role" placeholder="예: 서비스 기획" required>
+          </div>
+        </div>
+
+        <div id="questionList" class="question-list"></div>
+
+        <div class="opinion">
+          <label for="opinion">자유 의견</label>
+          <textarea id="opinion" name="opinion" placeholder="강의 개선을 위해 필요한 의견을 자유롭게 작성해주세요."></textarea>
+        </div>
+
+        <div class="button-row">
+          <button type="button" id="clearDraftButton">현재 입력 초기화</button>
+          <button type="button" id="deleteAllButton" class="danger">전체 통계 삭제</button>
+          <button type="button" id="showStatsButton">통계 보기</button>
+          <button type="submit" class="primary">응답 저장</button>
+        </div>
+        <div id="message" class="message" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <section id="statsView" class="card hidden">
+      <img src="me.jpg" alt="프로필 사진" class="page-photo">
+      <header class="header">
+        <div>
+          <p class="eyebrow">통계 리포트</p>
+          <h1>강의 만족도 조사 결과</h1>
+          <p class="guide">저장된 응답을 기준으로 문항별 평균과 전체 만족도 분포를 표시합니다.</p>
+        </div>
+      </header>
+
+      <div id="statsContent"></div>
+
+      <div class="button-row">
+        <button type="button" id="backButton">설문으로 돌아가기</button>
+        <button type="button" id="printButton" class="primary">A4 인쇄</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const RESPONSE_KEY = "surveyResponses";
+    const DRAFT_KEY = "surveyDraft";
+    const labels = ["매우 불만족", "불만족", "보통", "만족", "매우 만족"];
+    const questions = [
+      "강의 내용은 교육 목적에 부합했다.",
+      "강의 내용은 이해하기 쉽고 명확했다.",
+      "강사의 설명은 전문적이고 전달력이 좋았다.",
+      "강의 자료는 학습에 도움이 되었다.",
+      "강의 진행 속도와 시간 구성은 적절했다.",
+      "전반적으로 이번 강의에 만족한다."
+    ];
+
+    const form = document.getElementById("surveyForm");
+    const questionList = document.getElementById("questionList");
+    const message = document.getElementById("message");
+    const responseCount = document.getElementById("responseCount");
+    const surveyView = document.getElementById("surveyView");
+    const statsView = document.getElementById("statsView");
+    const statsContent = document.getElementById("statsContent");
+
+    function getResponses() {
+      try {
+        return JSON.parse(localStorage.getItem(RESPONSE_KEY)) || [];
+      } catch {
+        return [];
+      }
+    }
+
+    function saveResponses(responses) {
+      localStorage.setItem(RESPONSE_KEY, JSON.stringify(responses));
+      responseCount.textContent = responses.length;
+    }
+
+    function buildQuestions() {
+      questionList.innerHTML = questions.map((question, index) => {
+        const choices = labels.map((label, labelIndex) => `
+          <label>
+            <input type="radio" name="q${index}" value="${labelIndex + 1}" required>
+            <span>${label}</span>
+          </label>
+        `).join("");
+        return `
+          <fieldset class="question">
+            <legend class="question-title">${index + 1}. ${question}</legend>
+            <div class="scale">${choices}</div>
+          </fieldset>
+        `;
+      }).join("");
+    }
+
+    function collectDraft() {
+      const draft = {
+        age: form.age.value,
+        department: form.department.value,
+        role: form.role.value,
+        opinion: form.opinion.value,
+        scores: questions.map((_, index) => {
+          const checked = form.querySelector(`input[name="q${index}"]:checked`);
+          return checked ? Number(checked.value) : "";
+        })
+      };
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+    }
+
+    function restoreDraft() {
+      try {
+        const draft = JSON.parse(localStorage.getItem(DRAFT_KEY));
+        if (!draft) return;
+        form.age.value = draft.age || "";
+        form.department.value = draft.department || "";
+        form.role.value = draft.role || "";
+        form.opinion.value = draft.opinion || "";
+        (draft.scores || []).forEach((score, index) => {
+          if (score) {
+            const input = form.querySelector(`input[name="q${index}"][value="${score}"]`);
+            if (input) input.checked = true;
+          }
+        });
+      } catch {
+        localStorage.removeItem(DRAFT_KEY);
+      }
+    }
+
+    function clearForm() {
+      form.reset();
+      localStorage.removeItem(DRAFT_KEY);
+      message.textContent = "";
+    }
+
+    function validateScores() {
+      return questions.every((_, index) => form.querySelector(`input[name="q${index}"]:checked`));
+    }
+
+    function drawBarChart(canvas, averages) {
+      const ctx = canvas.getContext("2d");
+      const width = canvas.width;
+      const height = canvas.height;
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0, 0, width, height);
+      const left = 64;
+      const top = 28;
+      const chartWidth = width - left - 34;
+      const rowHeight = 48;
+      ctx.font = "14px sans-serif";
+      ctx.textBaseline = "middle";
+      averages.forEach((value, index) => {
+        const y = top + index * rowHeight;
+        const barWidth = (value / 5) * chartWidth;
+        ctx.fillStyle = "#e7eef3";
+        ctx.fillRect(left, y, chartWidth, 22);
+        ctx.fillStyle = "#047481";
+        ctx.fillRect(left, y, barWidth, 22);
+        ctx.fillStyle = "#203141";
+        ctx.fillText(`문항 ${index + 1}`, 14, y + 11);
+        ctx.fillText(value.toFixed(2), left + Math.min(barWidth + 8, chartWidth - 26), y + 11);
+      });
+    }
+
+    function drawPieChart(canvas, distribution) {
+      const ctx = canvas.getContext("2d");
+      const total = distribution.reduce((sum, count) => sum + count, 0);
+      const colors = ["#cbd5df", "#93a7b7", "#5b91a5", "#1194a0", "#047481"];
+      const centerX = canvas.width / 2;
+      const centerY = 145;
+      const radius = 92;
+      let start = -Math.PI / 2;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      distribution.forEach((count, index) => {
+        const angle = total ? (count / total) * Math.PI * 2 : 0;
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, radius, start, start + angle);
+        ctx.closePath();
+        ctx.fillStyle = colors[index];
+        ctx.fill();
+        start += angle;
+      });
+      ctx.font = "13px sans-serif";
+      labels.forEach((label, index) => {
+        const x = 24 + (index % 2) * 168;
+        const y = 278 + Math.floor(index / 2) * 26;
+        ctx.fillStyle = colors[index];
+        ctx.fillRect(x, y - 9, 14, 14);
+        ctx.fillStyle = "#203141";
+        ctx.fillText(`${label} ${distribution[index]}건`, x + 20, y);
+      });
+    }
+
+    function showStats() {
+      const responses = getResponses();
+      surveyView.classList.add("hidden");
+      statsView.classList.remove("hidden");
+      if (!responses.length) {
+        statsContent.innerHTML = '<div class="empty-state">저장된 응답이 없습니다.</div>';
+        return;
+      }
+
+      const sums = questions.map((_, index) => responses.reduce((sum, item) => sum + item.scores[index], 0));
+      const averages = sums.map(sum => sum / responses.length);
+      const allScores = responses.flatMap(item => item.scores);
+      const distribution = [1, 2, 3, 4, 5].map(score => allScores.filter(value => value === score).length);
+      const totalAverage = allScores.reduce((sum, value) => sum + value, 0) / allScores.length;
+
+      statsContent.innerHTML = `
+        <div class="summary-row">
+          <div class="summary-box">전체 응답 수<span>${responses.length}건</span></div>
+          <div class="summary-box">전체 평균<span>${totalAverage.toFixed(2)}점</span></div>
+          <div class="summary-box">최고 평균 문항<span>${averages.indexOf(Math.max(...averages)) + 1}번</span></div>
+        </div>
+        <div class="stats-grid">
+          <section class="stat-panel">
+            <h2>문항별 평균 점수</h2>
+            <canvas id="barChart" width="620" height="330"></canvas>
+          </section>
+          <section class="stat-panel">
+            <h2>전체 만족도 분포</h2>
+            <canvas id="pieChart" width="420" height="360"></canvas>
+          </section>
+        </div>
+      `;
+      drawBarChart(document.getElementById("barChart"), averages);
+      drawPieChart(document.getElementById("pieChart"), distribution);
+    }
+
+    buildQuestions();
+    restoreDraft();
+    responseCount.textContent = getResponses().length;
+
+    form.addEventListener("input", collectDraft);
+    form.addEventListener("change", collectDraft);
+
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+      if (!form.checkValidity() || !validateScores()) {
+        message.textContent = "필수 항목과 모든 만족도 문항에 응답해주세요.";
+        return;
+      }
+      const response = {
+        age: Number(form.age.value),
+        department: form.department.value.trim(),
+        role: form.role.value.trim(),
+        scores: questions.map((_, index) => Number(form.querySelector(`input[name="q${index}"]:checked`).value)),
+        opinion: form.opinion.value.trim(),
+        createdAt: new Date().toISOString()
+      };
+      const responses = getResponses();
+      responses.push(response);
+      saveResponses(responses);
+      console.log("전체 설문 응답", responses);
+      clearForm();
+      message.textContent = "응답이 저장되었습니다. 다음 수강생이 바로 입력할 수 있습니다.";
+    });
+
+    document.getElementById("clearDraftButton").addEventListener("click", clearForm);
+    document.getElementById("showStatsButton").addEventListener("click", showStats);
+    document.getElementById("backButton").addEventListener("click", () => {
+      statsView.classList.add("hidden");
+      surveyView.classList.remove("hidden");
+    });
+    document.getElementById("printButton").addEventListener("click", () => window.print());
+    document.getElementById("deleteAllButton").addEventListener("click", () => {
+      if (!confirm("저장된 전체 통계를 삭제할까요?")) return;
+      localStorage.removeItem(RESPONSE_KEY);
+      responseCount.textContent = "0";
+      message.textContent = "전체 통계를 삭제했습니다.";
+    });
+  </script>
+</body>
+</html>

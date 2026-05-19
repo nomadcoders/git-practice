@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>김서연 이력서</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(33, 150, 243, 0.42), transparent 28%),
+        radial-gradient(circle at 88% 14%, rgba(0, 209, 255, 0.32), transparent 26%),
+        linear-gradient(135deg, #e8f5ff 0%, #f5fbff 42%, #dfefff 100%);
+      color: #252a31;
+      font-family: Pretendard, "Noto Sans KR", "Malgun Gothic", Arial, sans-serif;
+      line-height: 1.55;
+      padding: 36px 18px;
+      overflow-x: hidden;
+    }
+
+    .resume-page {
+      position: relative;
+      overflow: hidden;
+      width: min(100%, 880px);
+      margin: 0 auto;
+      background:
+        linear-gradient(140deg, rgba(255, 255, 255, 0.96), rgba(237, 248, 255, 0.96)),
+        #ffffff;
+      padding: 34px 48px 38px;
+      border: 1px solid rgba(75, 169, 255, 0.32);
+      border-radius: 18px;
+      box-shadow: 0 26px 70px rgba(18, 94, 166, 0.2);
+    }
+
+    .resume-page::before,
+    .resume-page::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      border-radius: 50%;
+      animation: float-soft 8s ease-in-out infinite;
+    }
+
+    .resume-page::before {
+      width: 320px;
+      height: 320px;
+      right: -120px;
+      top: -110px;
+      background: rgba(0, 153, 255, 0.18);
+    }
+
+    .resume-page::after {
+      width: 180px;
+      height: 180px;
+      left: 48%;
+      bottom: -76px;
+      background: rgba(0, 204, 255, 0.14);
+      animation-delay: -3s;
+    }
+
+    .top-photo {
+      position: absolute;
+      top: 26px;
+      left: 28px;
+      width: 188px;
+      height: 236px;
+      object-fit: cover;
+      border-radius: 24px;
+      border: 7px solid #ffffff;
+      box-shadow: 0 18px 40px rgba(0, 84, 160, 0.28);
+      z-index: 2;
+      transform: rotate(-2deg);
+      animation: photo-pop 900ms ease both;
+    }
+
+    .header-contact {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1.5fr;
+      gap: 18px;
+      padding-bottom: 18px;
+      margin-left: 214px;
+      min-height: 190px;
+      border-bottom: 2px solid rgba(0, 116, 217, 0.18);
+      color: #4c6b84;
+      font-size: 12px;
+      letter-spacing: 0;
+      align-content: start;
+    }
+
+    .header-contact .label {
+      color: #0870c9;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .header-contact .value {
+      margin-top: 4px;
+      color: #102f4f;
+      font-weight: 700;
+    }
+
+    .main-content {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 42px;
+      padding-top: 34px;
+    }
+
+    .resume-header {
+      margin-bottom: 30px;
+    }
+
+    .resume-title {
+      margin: 0;
+      font-size: 4rem;
+      line-height: 0.92;
+      letter-spacing: 0;
+      color: #065ca8;
+      font-weight: 900;
+      text-shadow: 0 8px 24px rgba(0, 116, 217, 0.16);
+    }
+
+    .profession {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 7px 12px;
+      border: 1px solid rgba(0, 116, 217, 0.45);
+      border-radius: 999px;
+      background: linear-gradient(90deg, #0074d9, #00b8ff);
+      font-size: 13px;
+      color: #ffffff;
+      font-weight: 800;
+      box-shadow: 0 10px 22px rgba(0, 116, 217, 0.2);
+    }
+
+    .name-subtitle {
+      margin: 12px 0 0;
+      font-size: 28px;
+      font-weight: 800;
+      color: #123f63;
+    }
+
+    .summary {
+      margin: 0 0 30px;
+      color: #4b5563;
+      font-size: 14px;
+      text-align: justify;
+    }
+
+    .section {
+      margin-top: 30px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 16px;
+      color: #075ca8;
+      font-size: 17px;
+      font-weight: 900;
+    }
+
+    .section-title::after {
+      content: "";
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, #0788ef, rgba(7, 136, 239, 0.08));
+    }
+
+    .job-item,
+    .education-item {
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(0, 116, 217, 0.12);
+    }
+
+    .job-item:first-of-type,
+    .education-item:first-of-type {
+      padding-top: 0;
+    }
+
+    .item-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      color: #103c62;
+      font-weight: 900;
+    }
+
+    .item-date {
+      color: #0c7fd5;
+      font-size: 12px;
+      white-space: nowrap;
+      font-weight: 700;
+    }
+
+    .item-role {
+      margin-top: 4px;
+      color: #6a7280;
+      font-size: 13px;
+      font-style: italic;
+      font-weight: 600;
+    }
+
+    .item-desc {
+      margin: 10px 0 0;
+      color: #4b5563;
+      font-size: 13px;
+    }
+
+    .photo-container {
+      width: 100%;
+      aspect-ratio: 11 / 14;
+      background: linear-gradient(135deg, #e9f6ff, #d5edff);
+      border: 1px solid rgba(0, 116, 217, 0.25);
+      border-radius: 22px;
+      overflow: hidden;
+      margin-bottom: 28px;
+      box-shadow: 0 14px 28px rgba(0, 116, 217, 0.15);
+    }
+
+    .photo-container img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .skills-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-tag {
+      border-radius: 999px;
+      padding: 7px 10px;
+      background: #e5f4ff;
+      color: #075ca8;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .skill-tag.dark {
+      background: linear-gradient(90deg, #005bbb, #00a8ff);
+      color: #ffffff;
+    }
+
+    .language-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 7px 0;
+      color: #4b5563;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .dots {
+      display: flex;
+      gap: 5px;
+      flex: 0 0 auto;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: 1px solid #0074d9;
+      background: #ffffff;
+    }
+
+    .dot.filled {
+      background: #0074d9;
+    }
+
+    .link-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: #4b5563;
+      font-size: 13px;
+    }
+
+    .link-list li {
+      padding: 6px 0;
+      border-bottom: 1px solid #edf0f4;
+    }
+
+    .footer-name {
+      margin-top: 34px;
+      padding-top: 24px;
+      border-top: 1px solid #d9dee6;
+      text-align: center;
+      color: #065ca8;
+      font-size: clamp(42px, 9vw, 76px);
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    @keyframes float-soft {
+      0%, 100% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+      50% {
+        transform: translate3d(12px, -16px, 0) scale(1.04);
+      }
+    }
+
+    @keyframes photo-pop {
+      from {
+        opacity: 0;
+        transform: translateY(12px) rotate(-5deg) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: rotate(-2deg) scale(1);
+      }
+    }
+
+    @media (max-width: 760px) {
+      body {
+        padding: 18px 10px;
+      }
+
+      .resume-page {
+        padding: 28px 22px;
+      }
+
+      .header-contact,
+      .main-content {
+        grid-template-columns: 1fr;
+      }
+
+      .top-photo {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: min(100%, 280px);
+        height: 300px;
+        display: block;
+        margin: 0 0 24px;
+        transform: none;
+      }
+
+      .header-contact {
+        margin-left: 0;
+        min-height: auto;
+      }
+
+      .resume-title {
+        font-size: 3rem;
+      }
+
+      .photo-container {
+        max-width: 280px;
+      }
+    }
+
+    @media print {
+      @page {
+        size: A4;
+        margin: 10mm;
+      }
+
+      body {
+        padding: 0;
+        background: #ffffff;
+      }
+
+      .resume-page {
+        width: 100%;
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+        padding: 0;
+      }
+
+      .resume-page::before,
+      .resume-page::after {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <article class="resume-page">
+    <img src="me.jpg" alt="프로필 사진" class="top-photo">
+    <header class="header-contact">
+      <div>
+        <div class="label">Brand Portfolio</div>
+        <div class="value">@KIMSEOYEON.PORTFOLIO</div>
+      </div>
+      <div>
+        <div class="label">Phone</div>
+        <div class="value">010-1234-5678</div>
+      </div>
+      <div>
+        <div class="label">Email / Address</div>
+        <div class="value">seoyeon.kim@email.com<br>서울특별시 성동구 성수이로 123</div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <section>
+        <div class="resume-header">
+          <h1 class="resume-title">이력서</h1>
+          <span class="profession">마케팅 디렉터</span>
+          <p class="name-subtitle">김서연</p>
+        </div>
+
+        <p class="summary">
+          8년 이상의 경력을 바탕으로 브랜드 전략 수립, 디지털 캠페인 운영, 콘텐츠 기획, 성과 분석을 수행해 온 마케팅 실무자입니다. B2B 및 브랜드 마케팅 환경에서 리드 확보, 전환율 개선, 고객 접점 확대 등 구체적인 성과를 만들어 왔으며, 데이터 기반 의사결정과 유관 부서 협업을 통해 실행력 있는 마케팅 프로젝트를 안정적으로 운영해 왔습니다. 국내 대기업 및 성장형 스타트업 환경 모두에 적합한 체계적 업무 추진력과 실무 중심의 문제 해결 역량을 갖추고 있습니다.
+        </p>
+
+        <section class="section">
+          <h2 class="section-title">경력</h2>
+          <article class="job-item">
+            <div class="item-head">
+              <span>이노베이트 마케팅</span>
+              <span class="item-date">2021-2023</span>
+            </div>
+            <div class="item-role">마케팅 디렉터</div>
+            <p class="item-desc">B2B 테크 기업 대상 통합 마케팅 전략을 총괄하며 리드 수 45% 증가, 전환율 30% 향상에 기여했습니다.</p>
+          </article>
+          <article class="job-item">
+            <div class="item-head">
+              <span>크리에이티브 솔루션</span>
+              <span class="item-date">2019-2021</span>
+            </div>
+            <div class="item-role">시니어 마케팅 매니저</div>
+            <p class="item-desc">디지털 광고, 콘텐츠, SNS를 연계한 멀티채널 캠페인을 운영하고 유관 부서와 협업하여 브랜드 성과를 개선했습니다.</p>
+          </article>
+          <article class="job-item">
+            <div class="item-head">
+              <span>브랜드빌더스</span>
+              <span class="item-date">2017-2019</span>
+            </div>
+            <div class="item-role">마케팅 스페셜리스트</div>
+            <p class="item-desc">소셜미디어 운영, 콘텐츠 제작, 온라인 프로모션 기획 및 실행을 담당하며 고객 접점을 확대했습니다.</p>
+          </article>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">외국어</h2>
+          <div class="language-item">
+            <span>한국어</span>
+            <span class="dots" aria-label="5점 만점 중 5점">
+              <span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span>
+            </span>
+          </div>
+          <div class="language-item">
+            <span>영어</span>
+            <span class="dots" aria-label="5점 만점 중 4점">
+              <span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span>
+            </span>
+          </div>
+          <div class="language-item">
+            <span>일본어</span>
+            <span class="dots" aria-label="5점 만점 중 2점">
+              <span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </span>
+          </div>
+        </section>
+      </section>
+
+      <aside>
+        <figure class="photo-container">
+          <img src="me.jpg" alt="프로필 사진">
+        </figure>
+
+        <section class="section">
+          <h2 class="section-title">학력</h2>
+          <article class="education-item">
+            <div class="item-head">
+              <span>고려대학교 경영대학원</span>
+              <span class="item-date">2015.06 - 2017.07</span>
+            </div>
+            <div class="item-role">경영학 석사</div>
+          </article>
+          <article class="education-item">
+            <div class="item-head">
+              <span>성균관대학교</span>
+              <span class="item-date">2011.03 - 2015.02</span>
+            </div>
+            <div class="item-role">마케팅학 학사</div>
+          </article>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">핵심 역량</h2>
+          <div class="skills-container">
+            <span class="skill-tag dark">디지털 마케팅</span>
+            <span class="skill-tag">SEO/SEM</span>
+            <span class="skill-tag">콘텐츠 전략</span>
+            <span class="skill-tag dark">소셜미디어 운영</span>
+            <span class="skill-tag">데이터 분석</span>
+            <span class="skill-tag">브랜드 관리</span>
+            <span class="skill-tag dark">프로젝트 관리</span>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">자격증 및 링크</h2>
+          <ul class="link-list">
+            <li>구글 애널리틱스 인증</li>
+            <li>검색광고마케터 1급</li>
+            <li>www.seoyeonkim-portfolio.com</li>
+            <li>linkedin.com/in/seoyeonkim</li>
+          </ul>
+        </section>
+      </aside>
+    </main>
+
+    <footer class="footer-name">김서연</footer>
+  </article>
+</body>
+</html>
