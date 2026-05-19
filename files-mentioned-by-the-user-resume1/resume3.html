@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>김서연 브랜드 디자이너 이력서</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      background:
+        radial-gradient(circle at 10% 7%, rgba(0, 174, 255, 0.46), transparent 29%),
+        radial-gradient(circle at 88% 9%, rgba(0, 88, 255, 0.26), transparent 27%),
+        linear-gradient(140deg, #e8f5ff, #f8fcff 48%, #dbeaff);
+      color: #1f2937;
+      font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      padding: 34px 16px;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    .resume-container {
+      position: relative;
+      overflow: hidden;
+      width: min(100%, 880px);
+      background: #ffffff;
+      border-radius: 18px;
+      box-shadow: 0 24px 70px rgba(0, 88, 168, 0.2);
+      border: 1px solid rgba(0, 136, 255, 0.28);
+    }
+
+    .resume-container::before,
+    .resume-container::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      border-radius: 50%;
+      animation: orbit 10s ease-in-out infinite;
+    }
+
+    .resume-container::before {
+      width: 330px;
+      height: 330px;
+      right: -120px;
+      top: -130px;
+      background: rgba(0, 165, 255, 0.16);
+    }
+
+    .resume-container::after {
+      width: 220px;
+      height: 220px;
+      left: 30%;
+      bottom: -90px;
+      background: rgba(0, 88, 255, 0.11);
+      animation-delay: -4s;
+    }
+
+    .main-header {
+      position: relative;
+      z-index: 1;
+      min-height: 286px;
+      padding: 52px 48px 28px 292px;
+      border-bottom: 2px solid rgba(0, 116, 217, 0.16);
+      background:
+        linear-gradient(135deg, rgba(245, 251, 255, 0.96), rgba(224, 243, 255, 0.96)),
+        #fbfdff;
+    }
+
+    .hero-photo {
+      position: absolute;
+      top: 34px;
+      left: 42px;
+      width: 210px;
+      height: 258px;
+      object-fit: cover;
+      border-radius: 28px;
+      border: 7px solid #ffffff;
+      box-shadow: 0 18px 42px rgba(0, 85, 160, 0.28);
+      transform: rotate(-2deg);
+      animation: photo-splash 850ms ease both;
+    }
+
+    .name {
+      margin: 0;
+      color: #035fae;
+      font-size: 54px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .title {
+      margin: 12px 0 0;
+      color: #008ee8;
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .content-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 60% 40%;
+      gap: 0;
+    }
+
+    .left-column,
+    .right-column {
+      padding: 34px 42px 40px;
+    }
+
+    .right-column {
+      background:
+        linear-gradient(180deg, #f4fbff, #ffffff),
+        #f7fafc;
+      border-left: 1px solid rgba(0, 116, 217, 0.16);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .info-box {
+      border: 1px solid rgba(0, 136, 255, 0.18);
+      background: #fafdff;
+      padding: 14px;
+      min-height: 118px;
+    }
+
+    .info-box strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #0564b5;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .info-box span {
+      display: block;
+      color: #4b5d6f;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .divider {
+      height: 1px;
+      margin: 26px 0;
+      background: linear-gradient(90deg, #0074d9, rgba(0, 180, 255, 0.08));
+    }
+
+    .section-header {
+      margin: 0 0 18px;
+      color: #0564b5;
+      font-size: 17px;
+      font-weight: 900;
+    }
+
+    .job-entry {
+      margin-bottom: 22px;
+    }
+
+    .job-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+
+    .job-title {
+      margin: 0;
+      color: #172331;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .job-dates {
+      color: #0879ce;
+      font-size: 12px;
+      white-space: nowrap;
+      font-weight: 800;
+    }
+
+    .company {
+      margin: 0 0 8px;
+      color: #52677a;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .job-description {
+      margin: 0;
+      color: #445668;
+      font-size: 13px;
+      text-align: justify;
+    }
+
+    .achievement-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 11px;
+    }
+
+    .achievement-list li {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 10px;
+      align-items: start;
+      color: #425366;
+      font-size: 13px;
+    }
+
+    .achievement-list b {
+      color: #2f6f9f;
+      font-size: 15px;
+      line-height: 1.2;
+    }
+
+    .profile-photo {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      display: block;
+      border-radius: 6px;
+      background: #dbe6ee;
+      border: 1px solid rgba(0, 116, 217, 0.2);
+      margin-bottom: 28px;
+      box-shadow: 0 14px 28px rgba(0, 116, 217, 0.12);
+    }
+
+    .side-section {
+      margin-top: 28px;
+    }
+
+    .social-links {
+      color: #41576d;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .about-text {
+      margin: 0;
+      color: #41576d;
+      font-size: 13px;
+      text-align: justify;
+    }
+
+    .education-item {
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(0, 116, 217, 0.13);
+    }
+
+    @keyframes orbit {
+      0%, 100% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+      50% {
+        transform: translate3d(12px, -18px, 0) scale(1.04);
+      }
+    }
+
+    @keyframes photo-splash {
+      from {
+        opacity: 0;
+        transform: translateY(14px) rotate(-5deg) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: rotate(-2deg) scale(1);
+      }
+    }
+
+    .education-item strong {
+      display: block;
+      color: #203247;
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
+
+    .education-item span {
+      display: block;
+      color: #60758a;
+      font-size: 12px;
+    }
+
+    @media (max-width: 780px) {
+      .main-header {
+        padding: 34px 28px 24px;
+        min-height: auto;
+      }
+
+      .hero-photo {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: min(100%, 290px);
+        height: 320px;
+        display: block;
+        margin: 0 0 24px;
+        transform: none;
+      }
+
+      .name {
+        font-size: 42px;
+      }
+
+      .content-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .left-column,
+      .right-column {
+        padding: 28px;
+      }
+
+      .right-column {
+        border-left: none;
+        border-top: 1px solid #dce6ef;
+      }
+    }
+
+    @media print {
+      @page {
+        size: A4;
+        margin: 10mm;
+      }
+
+      body {
+        padding: 0;
+        background: #ffffff;
+      }
+
+      .resume-container {
+        width: 100%;
+        border-radius: 0;
+        box-shadow: none;
+        border: none;
+      }
+
+      .resume-container::before,
+      .resume-container::after {
+        display: none;
+      }
+
+      .main-header {
+        padding: 20px 24px 16px;
+      }
+
+      .left-column,
+      .right-column {
+        padding: 20px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <article class="resume-container">
+    <header class="main-header">
+      <img src="me.jpg" alt="프로필 사진" class="hero-photo">
+      <h1 class="name">김서연</h1>
+      <p class="title">시니어 브랜드 디자이너</p>
+    </header>
+
+    <main class="content-grid">
+      <section class="left-column">
+        <div class="contact-grid">
+          <div class="info-box">
+            <strong>연락처</strong>
+            <span>010-1234-5678</span>
+            <span>hello@seoyeonbrand.kr</span>
+          </div>
+          <div class="info-box">
+            <strong>주소</strong>
+            <span>서울특별시 성동구</span>
+            <span>대한민국</span>
+          </div>
+          <div class="info-box">
+            <strong>핵심 역량</strong>
+            <span>브랜드 전략</span>
+            <span>비주얼 아이덴티티</span>
+            <span>크리에이티브 디렉션</span>
+            <span>팀 리딩</span>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <section>
+          <h2 class="section-header">경력 사항</h2>
+          <article class="job-entry">
+            <div class="job-meta">
+              <h3 class="job-title">크리에이티브 디렉터</h3>
+              <span class="job-dates">2020 - 현재</span>
+            </div>
+            <p class="company">블루웨이브 브랜딩</p>
+            <p class="job-description">대기업 신규 브랜드 론칭과 스타트업 리브랜딩 프로젝트를 총괄하며 브랜드 인지도 조사 지표를 평균 28% 개선했습니다. 전략, 디자인, 콘텐츠 팀의 업무 흐름을 조율해 실행 가능한 브랜드 시스템을 구축했습니다.</p>
+          </article>
+          <article class="job-entry">
+            <div class="job-meta">
+              <h3 class="job-title">시니어 브랜드 디자이너</h3>
+              <span class="job-dates">2017 - 2020</span>
+            </div>
+            <p class="company">스튜디오 오르빗</p>
+            <p class="job-description">BI 리뉴얼, 캠페인 키비주얼, 디지털 콘텐츠 가이드를 담당했습니다. 디자인 시스템 도입으로 반복 제작 시간을 줄이고 온오프라인 접점의 시각 품질을 안정화했습니다.</p>
+          </article>
+          <article class="job-entry">
+            <div class="job-meta">
+              <h3 class="job-title">브랜드 디자이너</h3>
+              <span class="job-dates">2014 - 2017</span>
+            </div>
+            <p class="company">모노라인 디자인</p>
+            <p class="job-description">패키지, 편집물, 웹 프로모션 디자인을 수행하며 브랜드 적용 범위를 넓혔습니다. 마케팅 부서와 협업해 시즌 캠페인 전환율 향상에 기여했습니다.</p>
+          </article>
+        </section>
+
+        <div class="divider"></div>
+
+        <section>
+          <h2 class="section-header">수상 및 성과</h2>
+          <ol class="achievement-list">
+            <li><b>01</b><span>브랜드 디자인 우수상 - 한국디자인협회 (2023)</span></li>
+            <li><b>02</b><span>BI 리뉴얼 프로젝트 대상 - 국내 브랜딩 어워드 (2022)</span></li>
+            <li><b>03</b><span>크리에이티브 리더십상 - 디자인 포럼 코리아 (2021)</span></li>
+            <li><b>04</b><span>디지털 캠페인 최우수상 - 마케팅 어워드 (2020)</span></li>
+          </ol>
+        </section>
+      </section>
+
+      <aside class="right-column">
+        <img src="me.jpg" alt="프로필 사진" class="profile-photo">
+
+        <section class="side-section">
+          <h2 class="section-header">온라인 정보</h2>
+          <div class="social-links">
+            @seoyeon.brand<br>
+            www.seoyeonbrand.kr<br>
+            portfolio@seoyeonbrand.kr
+          </div>
+        </section>
+
+        <section class="side-section">
+          <h2 class="section-header">소개</h2>
+          <p class="about-text">
+            10년 이상 브랜드 디자인과 크리에이티브 디렉션을 수행해 온 디자이너입니다. 비즈니스 과제를 시각적 솔루션으로 전환하는 과정에서 브랜드 전략과 사용자 경험을 함께 고려합니다. 다양한 조직과 협업하며 디자인 의사결정의 근거를 명확히 제시하고, 실행 단계에서는 일정과 품질을 균형 있게 관리합니다. 브랜드 리뉴얼, 캠페인, 디자인 시스템 구축 경험을 바탕으로 성과 중심의 디자인을 만듭니다.
+          </p>
+        </section>
+
+        <section class="side-section">
+          <h2 class="section-header">학력 사항</h2>
+          <div class="education-item">
+            <strong>홍익대학교 대학원 디자인학과 석사 (2012 - 2014)</strong>
+            <span>브랜드 전략과 시각 커뮤니케이션을 중심으로 연구했습니다.</span>
+          </div>
+          <div class="education-item">
+            <strong>이화여자대학교 시각디자인학과 학사 (2008 - 2012)</strong>
+            <span>편집, 아이덴티티, 디지털 디자인 프로젝트를 수행했습니다.</span>
+          </div>
+          <div class="education-item">
+            <strong>디자인 기초과정 수료 (2007 - 2008)</strong>
+            <span>조형, 색채, 타이포그래피 기본기를 체계적으로 익혔습니다.</span>
+          </div>
+        </section>
+      </aside>
+    </main>
+  </article>
+</body>
+</html>
